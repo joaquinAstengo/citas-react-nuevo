@@ -8,9 +8,6 @@ function ListaPacientes() {
     </div>
 
       <Paciente></Paciente>
-      <Paciente></Paciente>
-      <Paciente></Paciente>
-      <Paciente></Paciente>
     </div>
 }
 

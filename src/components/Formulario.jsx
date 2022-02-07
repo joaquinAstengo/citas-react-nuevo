@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
+import Error from "./Error";
 
-function Formulario({setPacientes}) {
+function Formulario({pacientes, setPacientes}) {
     const [nombre, setNombre] = useState("");
     const [propietario, setPropietario] = useState("");
     const [email, setEmail] = useState("");
@@ -23,15 +24,20 @@ function Formulario({setPacientes}) {
             propietario,
             email,
             fecha,
-            sintomas
-            
+            sintomas,
         }
 
-        setPaciente(objetoPaciente);
+        setPacientes([...pacientes, objetoPaciente]);
+
+        setNombre('');
+        setPropietario('');
+        setEmail('');
+        setFecha('');
+        setSintomas('');
     };
 
     return (
-        <div className="lg:w-2/5 md:w-1/2 mx-5">
+        <div className= "lg:w-2/5 md:w-1/2 mx-5">
             <h2 className=" text-3xl font-bold text-center">Formulario</h2>
             <p className="text-lg text-center mt-5 mb-10">
                 Rellenar el {""}
@@ -42,11 +48,7 @@ function Formulario({setPacientes}) {
                 className="bg-white shadow-md rounded-lg py-10 mb-10 px-5"
                 action="GET">
 
-                {error && (
-                    <div className="bg-red-700 text-white w-full p-3 text-center font-bold uppercase mb-3">
-                        <p>Hay un error</p>
-                    </div>)
-                }
+                {error && <Error>Por favor rellene todos los campos</Error>}
 
                 <div className="mb-5">
                     <label className="block uppercase font-bold mb-1" htmlFor="mascota">
