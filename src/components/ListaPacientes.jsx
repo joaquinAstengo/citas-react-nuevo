@@ -1,13 +1,19 @@
-import React from 'react';
 import Paciente from './Paciente';
-function ListaPacientes() {
-  return <div className='lg:w-3/5 mx-5 md:h-screen md:w-1/2'>
+import {useState} from 'react';
+
+function ListaPacientes({pacientes}) {
+  return <div className='lg:w-3/5 mx-5 md:h-screen  md:w-1/2'>
     <div className="text-center">
-      <h2 className='font-bold mb-1 text-3xl'>Pacientes</h2>
-      <p>Listado y administración de {''}<span className='text-indigo-600'>Pacientes</span></p>
+      <h2 className='text-3xl font-bold text-center'>Pacientes</h2>
+      <p className='text-lg text-center mt-5 mb-10'>Listado y administración de {''}<span className='text-indigo-600'>Pacientes</span></p>
     </div>
 
-      <Paciente></Paciente>
+    {pacientes.map(paciente => (
+      <Paciente 
+      key={paciente.id}
+      paciente={paciente} />
+      
+    ))}
     </div>
 }
 

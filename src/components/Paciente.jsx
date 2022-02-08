@@ -1,23 +1,26 @@
+import {useState} from 'react';
 
+function Paciente({paciente}) {
 
-function Paciente() {
+  const {nombre, propietario, email, fecha, sintomas} = paciente;
+
   return (
           <>
       <div className='rounded-md shadow-md bg-white my-4 w-full p-5'>
       <p className='font-bold uppercase my-5'>Mascota: {''}
-      <span className="normal-case font-normal">Pichulo</span>
+      <span className="normal-case font-normal">{paciente.nombre}</span>
       </p>
       <p className='font-bold my-5 uppercase'>Propietario: {''}
-      <span className="normal-case font-normal">Agustina</span>
+      <span className="normal-case font-normal">{paciente.propietario}</span>
       </p>
       <p className='font-bold my-5 uppercase'>Email: {''}
-      <span className="normal-case font-normal">agustina.mramallo@gmail.com</span>
+      <span className="normal-case font-normal">{paciente.email}</span>
       </p>
       <p className='font-bold my-5  uppercase'>Alta: {''}
-      <span className="normal-case font-normal">25/10/22</span>
+      <span className="normal-case font-normal">{paciente.fecha}</span>
       </p>
       <p className='font-bold my-5  uppercase'>Síntomas: {''}
-        <span className="normal-case font-normal">Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe eius aliquam eligendi quis error fuga, reiciendis voluptate ullam accusamus unde ipsam iure quos itaque recusandae id dignissimos quo accusantium quidem laborum rem sapiente molestias vero! Quis, libero quos officiis hic quam tempora mollitia ut voluptatum a, ad enim aliquid nihil?</span>
+        <span className="normal-case font-normal">{paciente.sintomas}</span>
       </p>
     </div>
     </>

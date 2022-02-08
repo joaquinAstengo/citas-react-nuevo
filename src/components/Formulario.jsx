@@ -7,9 +7,13 @@ function Formulario({pacientes, setPacientes}) {
     const [email, setEmail] = useState("");
     const [fecha, setFecha] = useState("");
     const [sintomas, setSintomas] = useState("");
-
     const [error, setError] = useState(false)
+    const idPaciente = function(){
+        let idFecha = Date.now().toString()
+        let idMath = Math.random().toString(20).substr(2)
 
+        return idMath + idFecha;
+    }
     const handleSubmit = (e) => {
         e.preventDefault();
         
@@ -25,6 +29,7 @@ function Formulario({pacientes, setPacientes}) {
             email,
             fecha,
             sintomas,
+            id: idPaciente()
         }
 
         setPacientes([...pacientes, objetoPaciente]);
