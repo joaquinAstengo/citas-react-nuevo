@@ -1,20 +1,43 @@
 import Paciente from './Paciente';
-import {useState} from 'react';
+import { useEffect } from 'react';
 
-function ListaPacientes({pacientes}) {
+function ListaPacientes({ setPaciente, pacientes }) {
+
+
+
   return <div className='lg:w-3/5 mx-5 md:h-screen  md:w-1/2'>
-    <div className="text-center">
-      <h2 className='text-3xl font-bold text-center'>Pacientes</h2>
-      <p className='text-lg text-center mt-5 mb-10'>Listado y administración de {''}<span className='text-indigo-600'>Pacientes</span></p>
-    </div>
+    {pacientes && pacientes.length > 0 ? (
+      <>
+        <h2 className='text-3xl font-black text-center'>Pacientes</h2>
+        <p className='text-lg text-center mt-5 mb-10'>Listado y administración de {''}<span className='text-indigo-600'>Pacientes</span>
+        </p>
 
-    {pacientes.map(paciente => (
-      <Paciente 
-      key={paciente.id}
-      paciente={paciente} />
-      
-    ))}
-    </div>
+        {useEffect(() => {
+          console.log('Nuevo paciente cargado');
+        }, [pacientes])}
+
+        
+        {pacientes.map(paciente => (
+          <Paciente
+            setPaciente={setPaciente}
+            key={paciente.id}
+            paciente={paciente}
+
+          />
+        ))
+        }
+      </>
+    ) : (
+      <>
+        <h2 className='text-3xl font-black text-center'>No hay Pacientes</h2>
+        <p className='text-lg text-center mt-5 mb-10'>Listado y administración de {''}<span className='text-indigo-600'>Pacientes</span>
+        </p>
+
+      </>
+
+    )}
+
+  </div>
 }
 
 export default ListaPacientes;

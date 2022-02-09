@@ -1,38 +1,48 @@
 import { useState, useEffect } from "react";
 import Error from "./Error";
 
-function Formulario({pacientes, setPacientes}) {
+function Formulario({ pacientes, setPacientes, paciente }) {
+
+
     const [nombre, setNombre] = useState("");
     const [propietario, setPropietario] = useState("");
     const [email, setEmail] = useState("");
     const [fecha, setFecha] = useState("");
     const [sintomas, setSintomas] = useState("");
     const [error, setError] = useState(false)
-    const idPaciente = function(){
+
+    const idPaciente = function () {
         let idFecha = Date.now().toString()
         let idMath = Math.random().toString(20).substr(2)
 
         return idMath + idFecha;
     }
+
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        
+
         if ([nombre, propietario, email, fecha, sintomas].includes('')) {
             setError(true);
             return;
         }
         setError(false);
 
+        if (paciente.id) {
+            objetoPaciente.id = paciente.id
+        } else {
+            objetoPaciente.id = idPaciente()
+            setPacientes([...pacientes, objetoPaciente]);
+        }
+
         const objetoPaciente = {
             nombre,
             propietario,
             email,
             fecha,
-            sintomas,
-            id: idPaciente()
+            sintomas
         }
 
-        setPacientes([...pacientes, objetoPaciente]);
 
         setNombre('');
         setPropietario('');
@@ -41,8 +51,18 @@ function Formulario({pacientes, setPacientes}) {
         setSintomas('');
     };
 
+    useEffect(() => {
+        if (Object.keys.length > 0) {
+            setNombre(paciente.nombre)
+            setPropietario(paciente.propietario)
+            setEmail(paciente.email)
+            setFecha(paciente.fecha)
+            setSintomas(paciente.sintomas)
+        }
+    }, [paciente])
+
     return (
-        <div className= "lg:w-2/5 md:w-1/2 mx-5">
+        <div className="lg:w-2/5 md:w-1/2 mx-5">
             <h2 className=" text-3xl font-bold text-center">Formulario</h2>
             <p className="text-lg text-center mt-5 mb-10">
                 Rellenar el {""}
@@ -122,8 +142,8 @@ function Formulario({pacientes, setPacientes}) {
 
                 <input
                     type="submit"
-                    value="ENVIAR FORMULARIO"
-                    className="font-bold bg-indigo-600 text-white p-4 rounded-md hover:bg-indigo-700 transition-all cursor-pointer w-full "
+                    value={paciente.id ? 'Editar Paciente' : 'Agregar Paciente'}
+                    className="font-bold bg-indigo-600 text-white p-4 uppercase rounded-md hover:bg-indigo-700 transition-all cursor-pointer w-full "
                 />
             </form>
         </div>
