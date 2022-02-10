@@ -1,7 +1,15 @@
+import ListaPacientes from "./ListaPacientes";
 
-function Paciente({ paciente, setPaciente }) {
+function Paciente({ paciente, setPaciente, eliminarPaciente }) {
 
-  const { nombre, propietario, email, fecha, sintomas } = paciente;
+  const { nombre, propietario, email, fecha, sintomas, id } = paciente;
+
+  const handleEliminar = () => {
+    const respuesta = confirm('Desea eliminar este paciente?');
+    if (respuesta === true) {
+      eliminarPaciente(id)
+    }
+  }
 
   return (
     <>
@@ -31,6 +39,7 @@ function Paciente({ paciente, setPaciente }) {
         <button
           type="button"
           className="font-bold text-white bg-red-600 hover:bg-red-700 rounded-lg uppercase py-2 px-10 mr-10"
+          onClick={handleEliminar}
         >Eliminar</button>
       </div>
     </>

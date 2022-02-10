@@ -1,7 +1,7 @@
 import Paciente from './Paciente';
 import { useEffect } from 'react';
 
-function ListaPacientes({ setPaciente, pacientes }) {
+function ListaPacientes({ setPaciente, pacientes, eliminarPaciente}) {
 
 
 
@@ -19,6 +19,7 @@ function ListaPacientes({ setPaciente, pacientes }) {
         
         {pacientes.map(paciente => (
           <Paciente
+          eliminarPaciente={eliminarPaciente}
             setPaciente={setPaciente}
             key={paciente.id}
             paciente={paciente}

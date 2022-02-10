@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Error from "./Error";
 
-function Formulario({ pacientes, setPacientes, paciente }) {
+function Formulario({ pacientes, setPacientes, paciente, setPaciente}) {
 
 
     const [nombre, setNombre] = useState("");
@@ -28,13 +28,6 @@ function Formulario({ pacientes, setPacientes, paciente }) {
         }
         setError(false);
 
-        if (paciente.id) {
-            objetoPaciente.id = paciente.id
-        } else {
-            objetoPaciente.id = idPaciente()
-            setPacientes([...pacientes, objetoPaciente]);
-        }
-
         const objetoPaciente = {
             nombre,
             propietario,
@@ -42,6 +35,18 @@ function Formulario({ pacientes, setPacientes, paciente }) {
             fecha,
             sintomas
         }
+
+        if (paciente.id) {
+            objetoPaciente.id = paciente.id
+            const pacientesActualizados = pacientes.map(pacienteState => pacienteState.id === paciente.id ? objetoPaciente : pacienteState)
+            setPacientes(pacientesActualizados)
+            setPaciente({})
+        } else {
+            objetoPaciente.id = idPaciente()
+            setPacientes([...pacientes, objetoPaciente]);
+        }
+
+
 
 
         setNombre('');
